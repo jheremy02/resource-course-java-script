@@ -28,6 +28,7 @@ console.log(teams)
 
 
 
+
 // TODO: Mostrarla por pantalla.
 // TODO: Jugar lo partidos de todas las jornadas. Una vez terminada cada jornada, se deberá mostrar cómo queda la clasificación de la misma.
 // TODO: Una vez terminada la liga, se mostrarán estádísticas de número de goles totales y total de puntos ganados.
