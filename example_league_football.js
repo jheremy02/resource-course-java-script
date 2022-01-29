@@ -14,16 +14,26 @@ console.log(teams)
      // results
      // scores
 
-    constructor(name,teams,rounds=1){
+    constructor(name,teams,config={}){
         this.name=name;
         this.teams=teams;
-        this.rounds=rounds;
+        this.setup(config)
         //planificacion
         this.matchDaySchedule=[];
         this.scores=[];
         this.matches=[]
 
     }
+
+    setup(config={}){
+        const defaultConfig={rounds:1};
+        this.config=Object.assign(defaultConfig,config);
+
+    }
+
+
+
+    //DONE:Mostrar los equipos inscritos por pantalla
     showTeams(){
         console.log(this.teams)
     }
@@ -41,14 +51,32 @@ console.log(teams)
  otherLeague.showTeams()
 
  class FootballLeague extends League {
-     constructor(name,teams,rounds=1){
-        super(name,teams,rounds)
+     constructor(name,teams,config={}){
+        super(name,teams,config)
+        
+     }
+
+     setup(config={}){
+
+        const defaultConfig={
+            rounds:2,
+            pointsPerWin:3,
+            pointsPerDraw:1,
+            pointsPerLose:0,
+        }
+
+        this.config=Object.assign(defaultConfig,config);
      }
  }
 
+ const footballLeagueConfig={
+    pointsPerWin:3,
+    pointsPerDraw:1,
+    pointsPerLose:0,
+ }
+
  let ChampionsLeague=new FootballLeague("Champions League",teams)
- console.log(ChampionsLeague.name)
- ChampionsLeague.showTeams()
+ console.log(ChampionsLeague)
 
 // TODO: Mostrarla por pantalla.
 // TODO: Jugar lo partidos de todas las jornadas. Una vez terminada cada jornada, se deberá mostrar cómo queda la clasificación de la misma.
