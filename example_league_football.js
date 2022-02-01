@@ -16,7 +16,7 @@ console.log(teams)
 
     constructor(name,teams,config={}){
         this.name=name;
-        this.teams=teams;
+        this.setupTeams(teams);
         this.setup(config)
         //planificacion
         this.matchDaySchedule=[];
@@ -28,6 +28,24 @@ console.log(teams)
     setup(config={}){
         const defaultConfig={rounds:1};
         this.config=Object.assign(defaultConfig,config);
+
+    }
+
+    setupTeams(teams){
+        this.teams=[];
+        for (let team of teams) {
+            
+            let teamObj={
+                name:team,
+                matchesWon:0,
+                matchesDraw:0,
+                matchesLost:0
+            }
+            
+            // añadimos el objectp desriptivo del equipo al array de equipos
+
+            this.teams.push(teamObj)
+        }
 
     }
 
