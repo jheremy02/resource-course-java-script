@@ -1,6 +1,7 @@
 // TODO: Mostrar los equipos inscritos por pantalla.
 
 const teams=["PSG","Milan","Real Madrid","Barcelona","Manchester City","Liverpool","Bayer Munich"]
+
 console.log(teams)
 
 // TODO: Crear la planificación de jornadas y partidos de cada jornada.
@@ -33,14 +34,9 @@ console.log(teams)
 
     setupTeams(teams){
         this.teams=[];
-        for (let team of teams) {
+        for (let teamName of teams) {
             
-            let teamObj={
-                name:team,
-                matchesWon:0,
-                matchesDraw:0,
-                matchesLost:0
-            }
+            let teamObj=this.customizeTeam(teamName)
             
             // añadimos el objectp desriptivo del equipo al array de equipos
 
@@ -48,6 +44,17 @@ console.log(teams)
         }
 
     }
+
+    customizeTeam(teamName){
+        return {
+            name:teamName,
+            matchesWon:0,
+            matchesDraw:0,
+            matchesLost:0
+        }
+    }
+
+
 
 
 
@@ -85,6 +92,23 @@ console.log(teams)
 
         this.config=Object.assign(defaultConfig,config);
      }
+
+     customizeTeam(teamName){
+        //usamos customize para ejecutar el codigo de customizeTeam de la clase padre
+
+         const customizedTeam=super.customizeTeam(teamName)
+
+         //usamos spread operator para agregar los valores de customizedTeam en el erray de return
+        return {
+            ...customizedTeam,
+            points:0,
+            goalsFor:0,
+            goalsAgainst:0,
+            
+        }
+     }
+
+
  }
 
  const footballLeagueConfig={
