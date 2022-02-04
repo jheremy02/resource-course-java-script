@@ -1,0 +1,21 @@
+{
+  "name": "repositorio-resource-course-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "101.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jheremy02/resource-course-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jheremy02/resource-course-javascript/issues"
+  },
+  "homepage": "https://github.com/jheremy02/resource-course-javascript#readme",
+  "type": "module"
+}
