@@ -48,12 +48,6 @@
        }
    }
 
-
-
-
-
-   //DONE:Mostrar los equipos inscritos por pantalla
-   showTeams(){
-       console.log(this.teams)
-   }
+   
+   
 }

@@ -13,12 +13,12 @@ console.log(teams)
  let anyLeague= new League("superliga",teams)
 
  console.log(anyLeague.name)
- anyLeague.showTeams()
+ 
 
  let otherLeague=new League('Conference',["a","b","c"])
 
  console.log(otherLeague.name)
- otherLeague.showTeams()
+ 
 
  
 
@@ -31,7 +31,14 @@ console.log(teams)
  let ChampionsLeague=new FootballLeague("Champions League",teams)
  console.log(ChampionsLeague)
 
-// TODO: Mostrarla por pantalla.
+// DONE: Mostrarla por pantalla.
+
+const namesTeams=ChampionsLeague.teams.map(team=>team.name);
+
+
+namesTeams.forEach(team => {
+   console.log(team)
+});
 // TODO: Jugar lo partidos de todas las jornadas. Una vez terminada cada jornada, se deberá mostrar cómo queda la clasificación de la misma.
 // TODO: Una vez terminada la liga, se mostrarán estádísticas de número de goles totales y total de puntos ganados.
 
