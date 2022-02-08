@@ -51,6 +51,17 @@
 // TODO: Crear la planificación de jornadas y partidos de cada jornada.
 scheduleMatchDays(){
 
+
+    // geeramos el layout de la planificacion
+    this.initSchedule();
+
+
+    //ponemos los equipos locales
+    this.setLocalTeams
+
+}
+
+initSchedule(){
     // Planificacion es un conjunto de jornadas //planificacion=[j1,j2,j3,j4 ...]
     //Jornada es un conjunto de partidos //jornada=[p1,p2,p3,p4 ...]
     //Partido tiene local y visitante  // partido= {local:'local , visitante:'visitante'}
@@ -70,14 +81,35 @@ scheduleMatchDays(){
         for(let j=0;j<numberOfMatchPerDay;j++){
             let match={home:'home',away:'away'}
             //llenamos la jornada de partidos
-            matchDay.push(match)
+            matchDay.push(match);
         }
         // jornada llena , la ponemos en la planificacion
 
-        this.matchDaySchedule.push(matchDay)
+        this.matchDaySchedule.push(matchDay);
 
     }
   }
- 
+  
 
-}
+  setLocalTeams(){
+    const teamNames =this.teams.map(team => team.name); // teamNames=['A','B','C','D']
+    let teamIndex=0;
+    const teamIndexMaxValue = teamNames -2;
+
+    this.matchDaySchedule.forEach(matchDay=>{
+        matchDay.forEach(match=>{
+            match.home=teamNames[teamIndex];
+            teamIndex++
+
+            if (teamIndex > teamIndexMaxValue) {
+                teamIndex=0
+            }
+
+            }
+
+        )
+    })
+
+  }
+
+ }
