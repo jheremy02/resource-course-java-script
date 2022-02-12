@@ -3,29 +3,13 @@
 import { teams } from "./teams.js";
 import { League } from "./classes/League.js";
 import { FootballLeague } from "./classes/FootballLeague.js";
+import {setupArrays} from './utils/index.js';
 
-console.log(teams);
 
-let anyLeague = new League("superliga", teams);
+setupArrays();
+teams.shuffle();
 
-console.log(anyLeague.name);
-
-let otherLeague = new League("Conference", ["a", "b", "c"]);
-
-console.log(otherLeague.name);
-
-const footballLeagueConfig = {
-  pointsPerWin: 3,
-  pointsPerDraw: 1,
-  pointsPerLose: 0,
-};
-
-let ChampionsLeague = new FootballLeague("Champions League", [
-  "A",
-  "B",
-  "C",
-  "D"
-]);
+let ChampionsLeague = new FootballLeague("Champions League", teams);
 
 console.log('footballLeague.matchDaySchedule',ChampionsLeague.matchDaySchedule);
 
