@@ -1,3 +1,5 @@
+
+
 export class League {
   // name
   // teams
@@ -52,6 +54,26 @@ export class League {
     this.setLocalTeams();
 
     this.setAwayTeams();
+
+    this.fixLastTeamSchedule()
+
+
+
+  }
+
+  getTeamNames() {
+    return this.teams.map(team=>team.name);
+  }
+
+  getTeamNamesForSchedule(){
+    const teamNames=this.getTeamNames()
+
+    if (teamNames.length % 2 ==0) {
+      return teamNames;
+    } else {
+      return [...teamNames,null]// [A,B,C,D,NULL]
+    }
+
   }
 
   initSchedule() {
@@ -61,8 +83,8 @@ export class League {
 
     //inicializamo la planificacion
     this.matchDaySchedule = [];
-    const numberOfMatchesDays = this.teams.length - 1; //numero de jornadas
-    const numberOfMatchPerMatchDay = this.teams.length / 2; // numero de partidos por jornada
+    const numberOfMatchesDays = this.getTeamNamesForSchedule().length - 1; //numero de jornadas
+    const numberOfMatchPerMatchDay = this.getTeamNamesForSchedule().length / 2; // numero de partidos por jornada
 
     //recorremos para componer la jornada
     for (let i = 0; i < numberOfMatchesDays; i++) {
@@ -81,7 +103,7 @@ export class League {
   }
 
   setLocalTeams() {
-    const teamNames = this.teams.map((team) => team.name); // teamNames=['A','B','C','D']
+    const teamNames = this.getTeamNamesForSchedule(); // teamNames=['A','B','C','D']
     let teamIndex = 0;
     const teamIndexMaxValue = teamNames.length - 2;
 
@@ -98,9 +120,9 @@ export class League {
   }
 
   setAwayTeams() {
-      const teamNames=this.teams.map(team=>team.name); // extraigo los nombres de equipo de los objetos y los guardo en una variable
-      const maxAwayTeams=this.teams.length-1;
-      let teamIndex=this.teams.length -1 -1;
+      const teamNames=this.getTeamNamesForSchedule() ; // extraigo los nombres de equipo de los objetos y los guardo en una variable
+      const maxAwayTeams=this.getTeamNamesForSchedule().length-1;
+      let teamIndex=this.getTeamNamesForSchedule().length -1 -1;
 
       this.matchDaySchedule.forEach(matchDay=>{
           matchDay.forEach(function(match,matchIndex){
@@ -120,5 +142,23 @@ export class League {
       })
 
   }
+
+  fixLastTeamSchedule(){
+    this.matchDaySchedule.forEach((matchDay,matchIndex)=>{
+      // si la joranada es impar , le damos la vuelta al primer partido de la jornada
+
+      if (matchIndex % 2 === 1) {
+          //ej: {home:'E',away:'D'} =>  {home:'D',away:'E'}
+        const firstMatch = matchDay[0];
+        const temp = firstMatch.home ;
+
+        firstMatch.home = firstMatch.away ;
+        firstMatch.away = temp;
+        
+      }
+
+    })
+  }
+
 
 }
