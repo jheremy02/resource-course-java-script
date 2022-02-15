@@ -13,7 +13,7 @@ export class League {
     this.setupTeams(teams);
     this.setup(config);
     //planificacion
-    //this.matchDaySchedule = [];
+    this.matchDaySchedule = [];
     //this.scores = [];
     //this.matches = [];
   }
@@ -43,8 +43,49 @@ export class League {
     };
   }
 
+
+  createRound(){
+    const round=[];
+    this.initSchedule(round);
+    this.setLocalTeams(round);
+    this.setAwayTeams(round);
+    this.fixLastTeamSchedule(round);
+
+    return round
+  }
+
+  scheduleMatchDays(){
+
+    for (let i=0 ; i < this.config.rounds; i++) {
+      const round= this.createRound();
+      //si la jornada es impar , giramos los partidos
+      if (i % 2 === 1) {
+        this.swapTeamsWithinMatches(round)
+      }
+
+      this.matchDaySchedule=this.matchDaySchedule.concat(round)
+    }
+      
+   
+  }
+
+
+  swapTeamsWithinMatches(round){
+    for (const matchDay of round) {
+      for (const match of matchDay) {
+        const copyMatch = { ...match };
+        
+          const localTeam = match.home;
+          match.home = match.away;
+          match.away = localTeam;
+        }
+        
+      }
+  }
+
   // TODO: Crear la planificación de jornadas y partidos de cada jornada.
-  scheduleMatchDays() {
+  
+  /*scheduleMatchDays() {
     // generamos el layout de la planificacion
     this.initSchedule();
 
@@ -89,7 +130,7 @@ export class League {
         this.matchDaySchedule.push(...newRound);
       }
     }
-  }
+  } */
 
   //obtiene los nombres de los nombres de equipos para la planificacion y printarlo en pantalla
   getTeamNames() {
@@ -106,13 +147,12 @@ export class League {
     }
   }
 
-  initSchedule() {
+  initSchedule(round) {
     // Planificacion es un conjunto de jornadas //planificacion=[j1,j2,j3,j4 ...]
     //Jornada es un conjunto de partidos //jornada=[p1,p2,p3,p4 ...]
     //Partido tiene local y visitante  // partido= {local:'local , visitante:'visitante'}
 
-    //inicializamo la planificacion
-    this.matchDaySchedule = [];
+  
     const numberOfMatchesDays = this.getTeamNamesForSchedule().length - 1; //numero de jornadas
     const numberOfMatchPerMatchDay = this.getTeamNamesForSchedule().length / 2; // numero de partidos por jornada
 
@@ -127,16 +167,16 @@ export class League {
       }
       // jornada llena , la ponemos en la planificacion
 
-      this.matchDaySchedule.push(matchDay);
+      round.push(matchDay);
     }
   }
 
-  setLocalTeams() {
+  setLocalTeams(round) {
     const teamNames = this.getTeamNamesForSchedule(); // teamNames=['A','B','C','D']
     let teamIndex = 0;
     const teamIndexMaxValue = teamNames.length - 2;
 
-    this.matchDaySchedule.forEach((matchDay) => {
+    round.forEach((matchDay) => {
       matchDay.forEach((match) => {
         match.home = teamNames[teamIndex];
         teamIndex++;
@@ -148,12 +188,12 @@ export class League {
     });
   }
 
-  setAwayTeams() {
+  setAwayTeams(round) {
     const teamNames = this.getTeamNamesForSchedule(); // extraigo los nombres de equipo de los objetos y los guardo en una variable
     const maxAwayTeams = teamNames.length - 1;
     let teamIndex = maxAwayTeams - 1;
 
-    this.matchDaySchedule.forEach((matchDay) => {
+    round.forEach((matchDay) => {
       matchDay.forEach(function (match, matchIndex) {
         if (matchIndex === 0) {
           match.away = teamNames[maxAwayTeams];
@@ -169,8 +209,8 @@ export class League {
     });
   }
 
-  fixLastTeamSchedule() {
-    this.matchDaySchedule.forEach((matchDay, matchIndex) => {
+  fixLastTeamSchedule(round) {
+    round.forEach((matchDay, matchIndex) => {
       // si la joranada es impar , le damos la vuelta al primer partido de la jornada
 
       if (matchIndex % 2 === 1) {
