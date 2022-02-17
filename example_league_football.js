@@ -9,7 +9,7 @@ import {setupArrays} from './utils/index.js';
 setupArrays();
 teams.shuffle();
 
-let ChampionsLeague = new FootballLeague("Champions League", ['A','B','C'],{rounds:2});
+let ChampionsLeague = new FootballLeague("Champions League", ['A','B','C'],{rounds:1});
 
 console.log('footballLeague.matchDaySchedule',ChampionsLeague.matchDaySchedule);
 
@@ -26,7 +26,7 @@ teamNames.forEach((team) => {
 
 console.log(ChampionsLeague.matchDaySchedule);
 
-// TODO: Mostrarla la planificacion  por pantalla.
+// DONE: Mostrarla la planificacion  por pantalla.
 
 ChampionsLeague.matchDaySchedule.forEach((matchDay,matchDayIndex)=>{
   console.log(`JORNADA ${matchDayIndex+1}`)
@@ -44,5 +44,8 @@ ChampionsLeague.matchDaySchedule.forEach((matchDay,matchDayIndex)=>{
   console.log('==================================')
 })
 
-// TODO: Jugar lo partidos de todas las jornadas. Una vez terminada cada jornada, se deberá mostrar cómo queda la clasificación de la misma.
+// TODO: Jugar lo partidos de todas las jornadas. Una vez terminada cada jornada, se deberá mostrar cómo queda
+//la clasificación de la misma.
+
+ChampionsLeague.start()
 // TODO: Una vez terminada la liga, se mostrarán estádísticas de número de goles totales y total de puntos ganados.

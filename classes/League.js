@@ -14,6 +14,7 @@ export class League {
     this.setup(config);
     //planificacion
     this.matchDaySchedule = [];
+    this.summary=[];
     //this.scores = [];
     //this.matches = [];
   }
@@ -43,6 +44,34 @@ export class League {
     };
   }
 
+  start(){
+    //recorrer la planfificacion
+    //para jornada
+
+    for (const matchDay of this.matchDaySchedule) {
+
+      // para cada partido de la jornada
+
+      for (const match of matchDay) {
+        //jugar el partido
+
+        if(match.home === null || match.away==null){
+          //saltamos del partido porque el equipo descansa
+          continue;
+        }
+
+        const result = this.play(match);
+        console.log(result)
+      }
+
+    }
+  }
+
+  play(match){
+    throw new Error ('Play method must be implemented at child class')
+  }
+
+  
 
   createRound(){
     const round=[];
