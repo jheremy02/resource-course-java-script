@@ -10,7 +10,7 @@ export class FootballLeague extends League {
     setup(config={}){
 
        const defaultConfig={
-           rounds:2,
+           rounds:1,
            pointsPerWin:3,
            pointsPerDraw:1,
            pointsPerLose:0,

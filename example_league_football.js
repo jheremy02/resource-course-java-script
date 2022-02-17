@@ -9,7 +9,7 @@ import {setupArrays} from './utils/index.js';
 setupArrays();
 teams.shuffle();
 
-let ChampionsLeague = new FootballLeague("Champions League", teams);
+let ChampionsLeague = new FootballLeague("Champions League", ['A','B','C'],{rounds:2});
 
 console.log('footballLeague.matchDaySchedule',ChampionsLeague.matchDaySchedule);
 
