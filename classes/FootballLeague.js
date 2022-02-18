@@ -47,8 +47,49 @@ export class FootballLeague extends League {
 
     }
 
+    updateTeams(result){
+        const homeTeam = this.teams.find(team=>team.name===result.homeTeamName);
+        const awayTeam = this.teams.find(team=>team.name===result.awayTeamName);
+
+        homeTeam.goalsFor+=result.homeGoals;
+        homeTeam.goalsAgainst+=result.awayGoals;
+        awayTeam.goalsFor+=result.awayGoals;
+        awayTeam.goalsAgainst+=result.homeGoals;
+
+        if (result.homeGoals > result.awayGoals){
+            // gana el local
+
+            homeTeam.points+=this.config.pointsPerWin;
+            awayTeam.points+=this.config.pointsPerLose;
+            homeTeam.matchesWon++;
+            awayTeam.matchesLost++;
+
+        } else if (result.homeGoals < result.awayGoals) {
+            // gana el visitante
+            awayTeam.points+=this.config.pointsPerWin;
+            homeTeam.points+=this.config.pointsPerLose;
+            awayTeam.matchesWon++;
+            homeTeam.matchesLost++;
+
+        } else {
+            //empatan
+
+            awayTeam.points += this.config.pointsPerDraw
+            homeTeam.points += this.config.pointsPerDraw
+            homeTeam.matchesDraw++;
+            awayTeam.matchesDraw++;
+        }
+
+        console.log(homeTeam,awayTeam)
+
+    }
+
+
+
     generateGoals(){
         return Math.floor(Math.random()*10)
     }
+
+
 
 }

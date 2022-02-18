@@ -62,16 +62,26 @@ export class League {
 
         const result = this.play(match);
         console.log(result)
+
+        // actualizar las metricas de los equipos
+
+        this.updateTeams(result);
+
       }
 
     }
   }
 
+
+  updateTeams(result){
+    throw new Error('UpdateTeams method must be implemented at child class')
+  }
+  
   play(match){
     throw new Error ('Play method must be implemented at child class')
   }
 
-  
+
 
   createRound(){
     const round=[];
