@@ -80,7 +80,7 @@ export class FootballLeague extends League {
             awayTeam.matchesDraw++;
         }
 
-        console.log(homeTeam,awayTeam)
+        
 
     }
 
@@ -88,6 +88,36 @@ export class FootballLeague extends League {
 
     generateGoals(){
         return Math.floor(Math.random()*10)
+    }
+
+
+    getStandings() {
+       const temas=[...this.teams];
+
+       return this.teams.sort(function(teamA,teamB){
+           // -1 , 0 , 1
+
+            if (teamA.points > teamB) {
+                return -1
+            } else if (teamA<teamB) {
+                return 1
+            } else {
+                const goalsDiffA = teamA.goalsFor - teamA.goalsAgainst;
+                const goalsDiffB = teamB.goalsFor - teamB.goalsAgainst;
+                
+                if(goalsDiffA > goalsDiffB) {
+                    return -1
+                } else if (goalsDiffA < goalsDiffB) {
+                    return 1
+                } else {
+                    // más criterios de evaluacion en caso de empate
+                    return 0
+                }
+            
+            }
+
+
+       })
     }
 
 

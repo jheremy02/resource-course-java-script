@@ -48,6 +48,19 @@ ChampionsLeague.matchDaySchedule.forEach((matchDay,matchDayIndex)=>{
 //la clasificación de la misma.
 
 ChampionsLeague.start();
-console.table(ChampionsLeague.teams);
+// una vez terminada la joranada se debe mostrar como queda la clasificacion de la misma
+
+ChampionsLeague.summaries.forEach((summary,matchDayIndex)=>{
+  console.log(`Resultados de la jornada ${matchDayIndex+1}`)
+
+  summary.results.forEach((result)=>{
+    console.log(`${result.homeTeamName} ${result.homeGoals} - ${result.awayGoals} ${result.awayTeamName}`)
+
+  })
+
+  console.table(summary.standings)
+  console.log('\n')
+
+})
 
 // TODO: Una vez terminada la liga, se mostrarán estádísticas de número de goles totales y total de puntos ganados.

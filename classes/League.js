@@ -14,7 +14,7 @@ export class League {
     this.setup(config);
     //planificacion
     this.matchDaySchedule = [];
-    this.summary=[];
+    this.summaries=[];
     //this.scores = [];
     //this.matches = [];
   }
@@ -50,7 +50,11 @@ export class League {
 
     for (const matchDay of this.matchDaySchedule) {
 
-      // para cada partido de la jornada
+      // sirve para almacenar la informacion de los resultads de la jornada y generar su clasificacion
+      const matchDaySummary={
+      results:[], // array de resultados
+      standings: undefined // clasificacion al terminar la jornada
+      }
 
       for (const match of matchDay) {
         //jugar el partido
@@ -67,10 +71,24 @@ export class League {
 
         this.updateTeams(result);
 
+        // almacenamos el resultado de la jornada
+        matchDaySummary.results.push(result);
+
+        // TODO generar la tabla de clasificacion al finalizar la jornada
+        matchDaySummary.standings=this.getStandings().map(team=>Object.assign({},team))
+
+
+        // guardar el resumen de la jornada en el array de resumenes
+
+        this.summaries.push(matchDaySummary)
       }
+
+     
 
     }
   }
+
+
 
 
   updateTeams(result){
@@ -80,7 +98,9 @@ export class League {
   play(match){
     throw new Error ('Play method must be implemented at child class')
   }
-
+getStandings() {
+        throw new Error('getStandings method must be implemented at child class')
+    }
 
 
   createRound(){
